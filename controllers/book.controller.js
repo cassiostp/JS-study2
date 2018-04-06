@@ -73,8 +73,8 @@ exports.update = function(req, res) {
                 message: 'Book with id ' + req.params.bookId + ' not found'
             });
         }
-        book.title = req.body.title;
-        book.author = req.body.author;
+        if(req.body.title) book.title = req.body.title;
+        if(req.body.author) book.author = req.body.author;
         book.save(function(err, data) {
             if(err) {
                 res.status(500).send({
