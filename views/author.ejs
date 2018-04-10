@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<% include ../partials/head %>
+
+<body>
+	<% include ../partials/nav %>
+	<% include ../partials/modal-author %>
+	<div class="container">
+		
+		<div class="row justify-content-sm-center">
+			<h1 class="head"><%= title %></h1>
+		</div>
+		
+		<div class="row justify-content-sm-center">
+			<div class="col">
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover table-striped">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Name</th>
+								<th scope="col">Age</th>
+							</tr>
+						</thead>
+						<tbody>
+							<% authors.forEach(author => { %>
+								<tr>
+									<td><%= author.name %></td>
+									<td><%= author.age %></td>
+									<td>
+										<button class="btn btn-danger del-button btn-sm" data-id=<%= author._id %>>
+											Delete
+										</button>
+									</td>
+									<td>
+										<button class="btn btn-info edit-button btn-sm" data-toggle="modal" data-target="#modal" data-id=<%= author._id %>>
+											Edit
+										</button>
+									</td>
+								</tr>
+								<% }) %>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row justify-content-sm-center">
+				<button class="btn btn-success add-button" data-toggle="modal" data-target="#modal">
+					Add Author
+				</button>
+			</div>
+			
+		</div>
+		
+		<% include ../partials/footer %>
+		
+		<% include ../partials/scripts %>
+		<!-- <script>
+			let authorsJS = <%- JSON.stringify(authors) %>
+		</script> -->
+		<script src="../javascripts/authors-view.js"></script>
+	</body>
+	</html>
