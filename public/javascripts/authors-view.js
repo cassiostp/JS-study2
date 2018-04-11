@@ -81,10 +81,8 @@ function save(event){
 				newRow.hide();
 				$('tbody').append(newRow);
 				$(`.del-button[data-id=${result._id}]`).on('click', deleteRegister);
-				$('#modal').modal('toggle');
-				$('#modal').on('hidden.bs.modal', function(){
-					newRow.fadeIn('slow');
-				});
+				$('#modal').modal('hide');
+				newRow.fadeIn('slow');
 			}
 		});
 	}
