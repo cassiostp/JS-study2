@@ -9,11 +9,13 @@ function deleteRegister(event){
 	$.ajax({
 		url: '/authors/' + $(event.target).data('id'),
 		type:'DELETE',
-		success: function(result) {
-			console.log(result);
+		success: function() {
+			let row = $(event.target).closest('tr');
+			row.fadeOut('fast', () => {
+				row.remove();
+			});
 		}
 	});
-	$(this).closest('tr').remove();
 }
 
 function prepareModal(event){
@@ -61,24 +63,28 @@ function save(event){
 			type: 'POST',
 			data: $('.modal form').serialize(),
 			success: function(result) {
-				let newRow = 
-								`<tr>
+				let newRowHTML = `<tr>
 									<td>${result.name}</td>
 									<td>${result.age}</td>
-									<td>
+									<td class="text-center">
 										<button class="btn btn-info edit-button btn-sm" data-toggle="modal" data-target="#modal" data-id=${result._id}>
 											Edit
 										</button>
 									</td>
-									<td>
+									<td class="text-center">
 										<button class="btn btn-danger del-button btn-sm" data-id=${result._id}>
 											Delete
 										</button>
 									</td>
 								</tr>`;
+				let newRow = $(newRowHTML);
+				newRow.hide();
 				$('tbody').append(newRow);
 				$(`.del-button[data-id=${result._id}]`).on('click', deleteRegister);
 				$('#modal').modal('toggle');
+				$('#modal').on('hidden.bs.modal', function(){
+					newRow.fadeIn('slow');
+				});
 			}
 		});
 	}

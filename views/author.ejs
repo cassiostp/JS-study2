@@ -20,6 +20,11 @@
 							<tr>
 								<th scope="col">Name</th>
 								<th scope="col">Age</th>
+								<th scope="col" colspan="2" class="text-center">
+									<button class="btn btn-success add-button" data-toggle="modal" data-target="#modal">
+										Add Author
+									</button>
+								</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -27,12 +32,12 @@
 								<tr>
 									<td><%= author.name %></td>
 									<td><%= author.age %></td>
-									<td>
+									<td class="text-center">
 										<button class="btn btn-info edit-button btn-sm" data-toggle="modal" data-target="#modal" data-id=<%= author._id %>>
 											Edit
 										</button>
 									</td>
-									<td>
+									<td class="text-center">
 										<button class="btn btn-danger del-button btn-sm" data-id=<%= author._id %>>
 											Delete
 										</button>
@@ -44,13 +49,7 @@
 					</div>
 				</div>
 			</div>
-			
-			<div class="row justify-content-sm-center">
-				<button class="btn btn-success add-button" data-toggle="modal" data-target="#modal">
-					Add Author
-				</button>
-			</div>
-			
+
 		</div>
 		
 		<% include ../partials/footer %>
