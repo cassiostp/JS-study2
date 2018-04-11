@@ -23,7 +23,11 @@ function prepareModal(event){
 	let saveBtn = $('.modal-footer .save');
 	if(pressedBtn.hasClass('edit-button')){
 		modalTitle.html('Edit Author');
-		saveBtn.html('Save Changes').attr('id', 'edit').attr('data-id', pressedBtn.data('id'));
+
+		saveBtn.html('Save Changes').
+		attr('id', 'edit').
+		data('id', pressedBtn.data('id'));
+
 		$('#author-name').val(row.children().eq(0).html());
 		$('#author-age').val(row.children().eq(1).html());
 	} else {
@@ -34,7 +38,7 @@ function prepareModal(event){
 
 function cleanModal(){
 	$('#modal input').val('');
-	$('#modal .save').attr('id', '').attr('data-id', '');
+	$('#modal .save').attr('id', '').data('id', '');
 }
 
 function save(event){
@@ -44,8 +48,11 @@ function save(event){
 			type: 'PUT',
 			data: $('.modal form').serialize(),
 			success: function(result) {
-				console.log(result);
+				let row = $(`button[data-id='${result._id}']`).parents('tr');
+				row.children().eq(0).html(result.name);
+				row.children().eq(1).html(result.age);
 				$('#modal').modal('toggle');
+				alert('Author saved with success!');
 			}
 		});
 	} else {
@@ -53,9 +60,25 @@ function save(event){
 			url: '/authors/',
 			type: 'POST',
 			data: $('.modal form').serialize(),
-			success: function() {
+			success: function(result) {
+				let newRow = 
+								`<tr>
+									<td>${result.name}</td>
+									<td>${result.age}</td>
+									<td>
+										<button class="btn btn-info edit-button btn-sm" data-toggle="modal" data-target="#modal" data-id=${result._id}>
+											Edit
+										</button>
+									</td>
+									<td>
+										<button class="btn btn-danger del-button btn-sm" data-id=${result._id}>
+											Delete
+										</button>
+									</td>
+								</tr>`;
+				$('tbody').append(newRow);
+				$(`.del-button[data-id=${result._id}]`).on('click', deleteRegister);
 				$('#modal').modal('toggle');
-				window.location.reload();
 			}
 		});
 	}

@@ -28,13 +28,13 @@
 									<td><%= author.name %></td>
 									<td><%= author.age %></td>
 									<td>
-										<button class="btn btn-danger del-button btn-sm" data-id=<%= author._id %>>
-											Delete
+										<button class="btn btn-info edit-button btn-sm" data-toggle="modal" data-target="#modal" data-id=<%= author._id %>>
+											Edit
 										</button>
 									</td>
 									<td>
-										<button class="btn btn-info edit-button btn-sm" data-toggle="modal" data-target="#modal" data-id=<%= author._id %>>
-											Edit
+										<button class="btn btn-danger del-button btn-sm" data-id=<%= author._id %>>
+											Delete
 										</button>
 									</td>
 								</tr>
@@ -60,5 +60,5 @@
 			let authorsJS = <%- JSON.stringify(authors) %>
 		</script> -->
 		<script src="../javascripts/authors-view.js"></script>
-	</body>
-	</html>
+</body>
+</html>

@@ -2,7 +2,13 @@ var express = require('express');
 var router = express.Router();
 var books = require('../controllers/book.controller');
 
-router.get('/', books.findAll);
+router.get('/(.json)?', function(req, res) {
+	if(req.path === '/.json') {
+		books.findAll(req, res);
+	} else {
+		res.render('books');
+	}
+});
 
 router.post('/', books.create);
 

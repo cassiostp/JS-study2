@@ -45,9 +45,9 @@ exports.findAllJson = function(req, res) {
 	Author.find(function(err, authors) {
 		if(err) {
 			console.log(err);
-			res.status(500).send({message: 'Error retrieving authors'});
+			res.status(500).json({message: 'Error retrieving authors'});
 		} else {
-			res.send(authors);
+			res.json(authors);
 		}
 	});
 };
@@ -97,22 +97,22 @@ exports.findOneJson = function(req, res) {
 		if(err) {
 			console.log(err.kind);
 			if(err.kind === 'ObjectId') {
-				return res.status(404).send({
+				return res.status(404).json({
 					message: 'Author with id ' + 
 					req.params.authorId + ' not found'
 				});
 			}
-			return res.status(500).send({
+			return res.status(500).json({
 				message: 'Error retrieving author with id ' + 
 				req.params.authorId
 			});
 		}
 		if(!author) {
-			return res.status(404).send({
+			return res.status(404).json({
 				message: 'Author with id ' + req.params.authorId + ' not found'
 			});
 		}
-		res.send(author);
+		res.json(author);
 	});
 };
 
@@ -121,18 +121,18 @@ exports.update = function(req, res) {
 		if(err) {
 			console.log(err.kind);
 			if(err.kind === 'ObjectId') {
-				return res.status(404).send({
+				return res.status(404).json({
 					message:'Author with id ' + 
 					req.params.authorId + ' not found'
 				});
 			}
-			return res.status(500).send({
+			return res.status(500).json({
 				message: 'Error retrieving author with id ' + 
 				req.params.authorId
 			});
 		}
 		if(!author) {
-			return res.status(404).send({
+			return res.status(404).json({
 				message: 'Author with id ' + req.params.authorId + ' not found'
 			});
 		}
@@ -140,12 +140,12 @@ exports.update = function(req, res) {
 		if(req.body.age) author.age = req.body.age;
 		author.save(function(err, data) {
 			if(err) {
-				res.status(500).send({
+				res.status(500).json({
 					message: 'Failed to update author with id' + 
 					req.params.authorId
 				});
 			} else {
-				res.send(data);
+				res.json(data);
 			}
 		});
 	});
