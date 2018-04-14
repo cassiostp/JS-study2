@@ -6,11 +6,15 @@
 <body>
 	<% include ../partials/nav %>
 	<div class="container">
-		<p>PLACEHOLDER TEXT</p>
+		<% include ../partials/success-alert %>
+		Something should be here... i guess...
+		<% if(locals.user) {%>
+			<%= user%>
+		<% } %>
 	</div>
-
+	
 	<% include ../partials/footer %>
-
+	
 	<% include ../partials/scripts %>
 </body>
 </html>

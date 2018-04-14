@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+
+<% include ../partials/head %>
+
+<body>
+	<% include ../partials/nav %>
+	<div class="container">
+		<% include ../partials/error-alert %>
+		<h1 class="head text-center">Login</h1>
+		<form action="/login" method="POST">
+			<div class="form-group">
+				<label for="usr">Username:</label>
+				<input type="text" class="form-control" id="usr" name="username" placeholder="Enter Username" required>
+			</div>
+			<div class="form-group">
+				<label for="pwd">Password:</label>
+				<input type="password" class="form-control" id="pwd" name="password" placeholder="Enter Password" required>
+			</div>
+			<button type="submit" class="btn btn-primary">Login</button>
+		</form>
+	</div>
+
+	<% include ../partials/footer %>
+	
+	<% include ../partials/scripts %>
+</body>
+</html>

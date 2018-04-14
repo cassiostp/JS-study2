@@ -6,14 +6,30 @@
 	<div class='collapse navbar-collapse' id='navbarSupportedContent'>
 		<ul class='navbar-nav mr-auto'>
 			<li class='nav-item'>
-					<a class='nav-link' href='/'>Home<span class='sr-only'>(current)</span></a>
+				<a class='nav-link' href='/'>Home<span class='sr-only'>(current)</span></a>
 			</li>
 			<li class='nav-item'>
-					<a class='nav-link' href='/authors'>Authors<span class='sr-only'>(current)</span></a>
+				<a class='nav-link' href='/authors'>Authors<span class='sr-only'>(current)</span></a>
 			</li>
 			<li class='nav-item'>
 				<a class='nav-link' href='/books'>Books</a>
 			</li>
-		<ul>
+		</ul>
+		<form class="form-inline" action="/login" method="POST">
+			<div class="form-group mx-sm-3 mb-2">
+				<label for="nav-usr" class="sr-only">Username:</label>
+				<input type="text" class="form-control" id="nav-usr" name="username" placeholder="Username">
+			</div>
+			<div class="form-group mx-sm-3 mb-2">
+				<label for="nav-pwd" class="sr-only">Password</label>
+				<input type="password" class="form-control" id="nav-pwd" name="password" placeholder="Password">
+			</div>
+			<button type="submit" class="btn btn-primary mx-sm-3 mb-2">Login</button>
+		</form>
+		<ul class='navbar-nav justify-content-end'>
+			<li class='nav-item'>
+				<a class='nav-link' href='/signup'>Sign Up</a>
+			</li>
+		</ul>
 	</div>
 </nav>

@@ -1,21 +1,31 @@
-var express = require('express');
-var router = express.Router();
-var books = require('../controllers/book.controller');
+const express = require("express");
+const router = express.Router();
+const books = require("../controllers/book.controller");
 
-router.get('/(.json)?', function(req, res) {
-	if(req.path === '/.json') {
-		books.findAll(req, res);
-	} else {
-		res.render('books');
-	}
+router.use((req, res, next) => {
+  if (req.user) {
+    next();
+  } else {
+    res.render("login", {
+      message: "You must be logged in to access that page."
+    });
+  }
 });
 
-router.post('/', books.create);
+router.get("/(.json)?", function(req, res) {
+  if (req.path === "/.json") {
+    books.findAll(req, res);
+  } else {
+    res.render("books");
+  }
+});
 
-router.get('/:bookId', books.findOne);
+router.post("/", books.create);
 
-router.put('/:bookId', books.update);
+router.get("/:bookId", books.findOne);
 
-router.delete('/:bookId', books.delete);
+router.put("/:bookId", books.update);
+
+router.delete("/:bookId", books.delete);
 
 module.exports = router;
