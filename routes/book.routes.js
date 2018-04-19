@@ -3,7 +3,7 @@ const router = express.Router();
 const books = require("../controllers/book.controller");
 
 router.use((req, res, next) => {
-  if (req.user) {
+  if (req.isAuthenticated()) {
     next();
   } else {
     res.render("login", {

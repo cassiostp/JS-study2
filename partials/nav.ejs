@@ -15,21 +15,32 @@
 				<a class='nav-link' href='/books'>Books</a>
 			</li>
 		</ul>
-		<form class="form-inline" action="/login" method="POST">
-			<div class="form-group mx-sm-3 mb-2">
-				<label for="nav-usr" class="sr-only">Username:</label>
-				<input type="text" class="form-control" id="nav-usr" name="username" placeholder="Username">
-			</div>
-			<div class="form-group mx-sm-3 mb-2">
-				<label for="nav-pwd" class="sr-only">Password</label>
-				<input type="password" class="form-control" id="nav-pwd" name="password" placeholder="Password">
-			</div>
-			<button type="submit" class="btn btn-primary mx-sm-3 mb-2">Login</button>
-		</form>
-		<ul class='navbar-nav justify-content-end'>
-			<li class='nav-item'>
-				<a class='nav-link' href='/signup'>Sign Up</a>
-			</li>
-		</ul>
+		<% if (!locals.login) { %>
+			<form class="form-inline" action="/login" method="POST">
+				<div class="form-group mx-sm-3 mb-2">
+					<label for="nav-usr" class="sr-only">Username:</label>
+					<input type="text" class="form-control" id="nav-usr" name="username" placeholder="Username">
+				</div>
+				<div class="form-group mx-sm-3 mb-2">
+					<label for="nav-pwd" class="sr-only">Password</label>
+					<input type="password" class="form-control" id="nav-pwd" name="password" placeholder="Password">
+				</div>
+				<button type="submit" class="btn btn-primary mx-sm-3 mb-2">Login</button>
+			</form>
+			<ul class='navbar-nav justify-content-end'>
+				<li class='nav-item'>
+					<a class='nav-link' href='/signup'>Sign Up</a>
+				</li>
+			</ul>
+		<% } else { %>
+			<ul class='navbar-nav justify-content-end'>
+				<span class="navbar-text">
+					Welcome, <%= locals.user %>
+				</span>
+				<li class='nav-item'>
+					<a class="btn btn-primary mx-sm-3 mb-2" href='/logout'>Logout</a>
+				</li>
+			</ul>
+		<% } %>
 	</div>
 </nav>
