@@ -26,6 +26,19 @@ exports.findAll = function(req, res) {
   Book.find(function(err, books) {
     if (err) {
       console.log(err);
+      res
+        .status(500)
+        .render("error", { message: "Internal Server Error", error: err });
+    } else {
+      res.render("books", { title: "Books", books: books });
+    }
+  });
+};
+
+exports.findAllJson = function(req, res) {
+  Book.find(function(err, books) {
+    if (err) {
+      console.log(err);
       res.status(500).send({ message: "Error retrieving books" });
     } else {
       res.send(books);

@@ -14,9 +14,9 @@ router.use((req, res, next) => {
 
 router.get("/(.json)?", function(req, res) {
   if (req.path === "/.json") {
-    books.findAll(req, res);
+    books.findAllJson(req, res);
   } else {
-    res.render("books");
+    books.findAll(req, res);
   }
 });
 
